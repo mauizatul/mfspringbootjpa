@@ -2,6 +2,7 @@ package com.juaracoding.mfspringbootjpa.handler;
 
 import com.juaracoding.mfspringbootjpa.utils.ConstantMessage;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -37,7 +38,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		}
 
 		ApiError apiError =
-				new ApiError(HttpStatus.UNPROCESSABLE_ENTITY,ConstantMessage.ERROR_UNPROCCESSABLE,ex,request.getDescription(false),"00001");
+				new ApiError(HttpStatus.UNPROCESSABLE_ENTITY, ConstantMessage.ERROR_UNPROCCESSABLE,ex,request.getDescription(false),"00001");
 		apiError.setSubErrors(lsSubError);
 		return ResponseEntity.unprocessableEntity().body(apiError);
 	}
